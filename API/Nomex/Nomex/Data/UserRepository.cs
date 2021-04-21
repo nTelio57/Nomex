@@ -21,6 +21,11 @@ namespace Nomex.Data
             return (_context.SaveChanges() >= 0);
         }
 
+        public User GetUserByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(p => p.Email == email);
+        }
+
         public IEnumerable<User> GetAllUsers()
         {
             return _context.Users.ToList();

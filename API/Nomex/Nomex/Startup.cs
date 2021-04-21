@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,13 @@ namespace Nomex
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IUserRepo, UserRepository>();
@@ -46,6 +54,14 @@ namespace Nomex
             services.AddScoped<IMedicineRepo, MedicineRepository>();
             services.AddScoped<IUsageRepo, UsageRepository>();
             services.AddScoped<IRecipeRepo, RecipeRepository>();
+
+            /*var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://localhost:5000", "http://192.168.0.243:5000")
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .Build();*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +71,7 @@ namespace Nomex
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("MyPolicy");
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

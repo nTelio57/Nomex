@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Nomex.Data;
 using Nomex.Dtos;
 using Nomex.Models;
+using Nomex.Utilities;
 
 namespace Nomex.Controllers
 {
@@ -46,12 +47,29 @@ namespace Nomex.Controllers
         {
             var userModel = _mapper.Map<User>(userCreateDto);
 
+            userModel.Password = Crypto.Hash(userModel.Password);
+            userModel.Salt = Crypto.GenerateSalt();
+
             _repository.CreateUser(userModel);
             _repository.SaveChanges();
 
             var userReadDto = _mapper.Map<UserReadDto>(userModel);
 
             return CreatedAtRoute(nameof(GetUserById), new {Id = userReadDto.Id}, userReadDto);
+        }
+
+        [HttpPost("login")]
+        public ActionResult<AuthToken> Login(UserCreateDto userCreateDto)
+        {
+            var userModel = _mapper.Map<User>(userCreateDto);
+
+            User account = _repository.GetUserByEmail(userModel.Email);
+            if (account == null)
+                return NotFound();
+            if (Crypto.CompareHash(Crypto.Hash(userModel.Password), account.Password) == false)
+                return NotFound();
+
+            return Ok(new AuthToken() { Token = "thisIsToken9579"});
         }
 
         [HttpPut("{id}")]
