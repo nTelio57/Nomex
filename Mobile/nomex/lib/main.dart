@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:nomex/MainScreen.dart';
 
 import './WelcomeScreen.dart';
 import './LoginScreen.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
-      home: WelcomeScreen(),
+      home: MainScreen(),
     );
   }
 }
