@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nomex/utilities/constants.dart';
 
-import './RegisterScreen.dart';
-import './LoginScreen.dart';
+import 'RegisterScreen.dart';
+import 'LoginScreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

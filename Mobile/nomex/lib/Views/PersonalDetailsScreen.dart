@@ -1,19 +1,22 @@
+
 import 'package:flutter/material.dart';
 import 'package:nomex/utilities/constants.dart';
 
-import './LoginScreen.dart';
-
-class RegisterScreen extends StatefulWidget {
+class PersonalDetailsScreen extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _PersonalDetailsScreenState createState() => _PersonalDetailsScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen>
+class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
 {
+  final TextEditingController _emailText = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(children: <Widget>[
+      body: Stack(
+        children: <Widget>[
           Container(
             height: double.infinity,
             width: double.infinity,
@@ -23,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                     end: Alignment.bottomCenter,
                     colors: [
                       Colors.orangeAccent,
-                      Colors.orange,
+                      Colors.orange
                     ],
                     stops: [0.4, 0.7]
                 )
@@ -50,28 +53,27 @@ class _RegisterScreenState extends State<RegisterScreen>
                     ),
                   ),
                   SizedBox(height: 30.0),
-                  _emailField(),
+                  _nameField(),
                   SizedBox(height: 30.0),
-                  _passwordField(),
+                  _surnameField(),
                   SizedBox(height: 30.0),
-                  _passwordRepeatField(),
+                  _personalCodeField(),
                   SizedBox(height: 20.0),
-                  _registerButton(),
-                  _loginButton(),
+                  _birthDateField(),
                 ],
               ),
             ),
           )
         ],
-        )
+      ),
     );
   }
 
-  Widget _emailField()
+  Widget _nameField()
   {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        "Email",
+        "Name",
         style: kLabelStyle,
       ),
       SizedBox(height: 10.0),
@@ -81,6 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen>
         height: 60.0,
         child: TextField(
           keyboardType: TextInputType.emailAddress,
+          controller: _emailText,
           style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans'
@@ -92,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 Icons.email,
                 color: Colors.white,
               ),
-              hintText: "Enter e-mail",
+              hintText: "Enter your name",
               hintStyle: kHintTextStyle
           ),
         ),
@@ -101,11 +104,11 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
   }
 
-  Widget _passwordField()
+  Widget _surnameField()
   {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        "Password",
+        "Surname",
         style: kLabelStyle,
       ),
       SizedBox(height: 10.0),
@@ -114,121 +117,86 @@ class _RegisterScreenState extends State<RegisterScreen>
         decoration: kBoxDecorationStyle,
         height: 60.0,
         child: TextField(
-          obscureText: true,
+          keyboardType: TextInputType.emailAddress,
+          controller: _emailText,
           style: TextStyle(
               color: Colors.white,
-              fontFamily: 'OpenSans'),
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: "Enter password",
-              hintStyle: kHintTextStyle
-          ),
-        ),
-      )
-    ],
-    );
-  }
-
-  Widget _passwordRepeatField()
-  {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        "Repeat password",
-        style: kLabelStyle,
-      ),
-      SizedBox(height: 10.0),
-      Container(
-        alignment: Alignment.centerLeft,
-        decoration: kBoxDecorationStyle,
-        height: 60.0,
-        child: TextField(
-          obscureText: true,
-          style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans'),
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: "Repeat password",
-              hintStyle: kHintTextStyle
-          ),
-        ),
-      )
-    ],
-    );
-  }
-
-  Widget _registerButton()
-  {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: ElevatedButton(
-        onPressed: () => print('Register clicked'),
-        //padding: EdgeInsets.all(15.0),
-        style: ElevatedButton.styleFrom(
-          elevation: 5.0,
-          padding: EdgeInsets.all(15.0),
-          primary: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0)
-          ),
-        ),
-        child: Text(
-          'REGISTER',
-          style: TextStyle(
-              color: Colors.orange,
-              letterSpacing: 1.5,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans'
           ),
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+              hintText: "Enter your surname",
+              hintStyle: kHintTextStyle
+          ),
         ),
-      ),
+      )
+    ],
     );
   }
 
-  Widget _loginButton()
+  Widget _personalCodeField()
   {
-    return GestureDetector(
-      onTap: (){
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()
-            )
-        );
-      },
-      child: RichText(
-        text: TextSpan(
-            children: [
-              TextSpan(
-                  text: 'Already have an account? ',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w400
-                  )
-              ),
-              TextSpan(
-                  text: 'Login',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold
-                  )
-              ),
-            ]
-        ),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        "Personal code",
+        style: kLabelStyle,
       ),
+      SizedBox(height: 10.0),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: kBoxDecorationStyle,
+        height: 60.0,
+        child: TextField(
+          keyboardType: TextInputType.emailAddress,
+          controller: _emailText,
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans'
+          ),
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+              hintText: "Enter your personal code",
+              hintStyle: kHintTextStyle
+          ),
+        ),
+      )
+    ],
     );
   }
+
+  Widget _birthDateField()
+  {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        "Name",
+        style: kLabelStyle,
+      ),
+      SizedBox(height: 10.0),
+
+    ],
+    );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = (await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101)));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
+  }
+
 }
