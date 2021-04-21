@@ -5,7 +5,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Startup Name Generator',
-        home: Text('Labas'),
+        home: Text('Hello'),
     );
   }
 }
