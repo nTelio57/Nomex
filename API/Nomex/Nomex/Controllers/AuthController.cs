@@ -37,11 +37,13 @@ namespace Nomex.Auth
                 });
             }
 
+            var salt = Crypto.GenerateSalt();
+
             var newUser = new User
             {
                 Email = authRequest.Email,
-                Password = Crypto.Hash(authRequest.Password),
-                Salt = Crypto.GenerateSalt()
+                Password = Crypto.Hash(authRequest.Password+salt),
+                Salt = salt
             };
 
             _repository.AddNewUser(newUser);

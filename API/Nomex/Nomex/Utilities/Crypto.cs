@@ -8,9 +8,15 @@ namespace Nomex.Utilities
 {
     public class Crypto
     {
-        public static string GenerateSalt()
+        public static string GenerateSalt(int saltLength = 32)
         {
-            return "notSaltedYet";
+            var salt = new byte[saltLength];
+            using (var random = new RNGCryptoServiceProvider())
+            {
+                random.GetNonZeroBytes(salt);
+            }
+            
+            return Convert.ToBase64String(salt);
         }
 
         public static string Hash(string password)

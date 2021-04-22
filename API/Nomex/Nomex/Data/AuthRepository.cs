@@ -59,7 +59,9 @@ namespace Nomex.Auth
 
         public User GetUserByLogin(string email, string password)
         {
-            User user =_context.Users.FirstOrDefault(x => x.Email == email && x.Password.Equals(Crypto.Hash(password)));
+            User user =_context.Users.FirstOrDefault(x => x.Email == email);
+            if (user == null || !user.Password.Equals(Crypto.Hash(password + user.Salt)))
+                return null;
             user.PersonalDetails = _context.UserPersonals.FirstOrDefault(x => x.Id == user.PersonalDetailsId);
             return user;
         }
