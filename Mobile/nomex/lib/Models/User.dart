@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:nomex/Models/PersonalDetails.dart';
 
 part 'User.g.dart';
 
@@ -8,6 +9,7 @@ class User{
 
   int? id;
   String email;
+  PersonalDetails? personalDetails;
 
   User(this.id, this.email);
 

@@ -44,7 +44,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Register",
+                    "Personal info",
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'OpenSans',
@@ -59,7 +59,8 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
                   SizedBox(height: 30.0),
                   _personalCodeField(),
                   SizedBox(height: 20.0),
-                  _birthDateField(),
+                  //_birthDateField(),
+                  _continueButton(),
                 ],
               ),
             ),
@@ -197,6 +198,41 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
       setState(() {
         selectedDate = picked;
       });
+  }
+
+  Widget _continueButton()
+  {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          print('Continue clicked');
+          setState(() {
+
+          });
+        } ,
+        //padding: EdgeInsets.all(15.0),
+        style: ElevatedButton.styleFrom(
+          elevation: 5.0,
+          padding: EdgeInsets.all(15.0),
+          primary: Colors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0)
+          ),
+        ),
+        child: Text(
+          'CONTINUE',
+          style: TextStyle(
+              color: Colors.orange,
+              letterSpacing: 1.5,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans'
+          ),
+        ),
+      ),
+    );
   }
 
 }
