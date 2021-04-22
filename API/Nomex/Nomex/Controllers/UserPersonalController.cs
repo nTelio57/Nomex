@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Nomex.Data;
 using Nomex.Dtos.UserPersonal;
 using Nomex.Models;
 
 namespace Nomex.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserPersonalController : ControllerBase

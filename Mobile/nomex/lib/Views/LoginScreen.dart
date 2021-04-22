@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:nomex/Models/AuthRequest.dart';
+import 'package:nomex/Views/PersonalDetailsScreen.dart';
 import 'package:nomex/utilities/constants.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import './RegisterScreen.dart';
+import 'RegisterScreen.dart';
+import 'HomeScreen.dart';
+import '../Models/User.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,6 +16,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen>{
+
+  final TextEditingController _emailText = TextEditingController();
+  final TextEditingController _passwordText = TextEditingController();
 
   Widget _emailField() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -22,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen>{
         decoration: kBoxDecorationStyle,
         height: 60.0,
         child: TextField(
+          controller: _emailText,
           keyboardType: TextInputType.emailAddress,
           style: TextStyle(
               color: Colors.white,
@@ -56,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen>{
         decoration: kBoxDecorationStyle,
         height: 60.0,
         child: TextField(
+          controller: _passwordText,
           obscureText: true,
           style: TextStyle(
               color: Colors.white,
@@ -97,7 +109,13 @@ class _LoginScreenState extends State<LoginScreen>{
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => print('Login clicked'),
+        onPressed: () {
+          loginUser(_emailText.text, _passwordText.text);
+          print('Login clicked');
+          setState(() {
+
+          });
+        } ,
         //padding: EdgeInsets.all(15.0),
         style: ElevatedButton.styleFrom(
           elevation: 5.0,
@@ -154,6 +172,43 @@ class _LoginScreenState extends State<LoginScreen>{
         ),
       ),
     );
+  }
+
+  loginUser(String email, String password) async
+  {
+    var authRequest = new AuthRequest(email, password);
+    Map data = {
+      'email': email,
+      'password': password
+    };
+    var jsonData = null;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response = await http.post(Uri.https('10.0.2.2:5001', '/api/Auth/login'),
+        body: json.encode(authRequest),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        }
+      );
+
+    jsonData = json.decode(response.body);
+    if(response.statusCode == 200){
+      print(response.body);
+
+      setState(() {
+        User user = User.fromJson(jsonData['user']);
+        sharedPreferences.setString("token", jsonData['token']);
+        sharedPreferences.setInt("id", user.id!);
+        User.currentLogin = user;
+
+        if(user.personalDetails == null)
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => PersonalDetailsScreen()), (Route<dynamic> route) => false);
+        else
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()), (Route<dynamic> route) => false);
+      });
+    }else
+      {
+        print(jsonData['errors']);
+      }
   }
 
   @override

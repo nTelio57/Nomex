@@ -5,13 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Nomex.Data;
 using Nomex.Dtos;
 using Nomex.Models;
+using Nomex.Utilities;
 
 namespace Nomex.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -45,6 +48,9 @@ namespace Nomex.Controllers
         public ActionResult<UserReadDto> CreateUser(UserCreateDto userCreateDto)
         {
             var userModel = _mapper.Map<User>(userCreateDto);
+
+            userModel.Password = Crypto.Hash(userModel.Password);
+            userModel.Salt = Crypto.GenerateSalt();
 
             _repository.CreateUser(userModel);
             _repository.SaveChanges();
