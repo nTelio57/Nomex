@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nomex/Models/AuthRequest.dart';
 import 'package:nomex/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -174,20 +175,17 @@ class _LoginScreenState extends State<LoginScreen>{
 
   loginUser(String email, String password) async
   {
-    Map data = {
-      'email': email,
-      'password': password
-    };
-    User loginUser = new User(0, email, password);
-    var jsonData = null;
+    var authRequest = new AuthRequest(email, password);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var response = await http.post(Uri.https('10.0.2.2:5001', '/api/Users/login'),
-        body: json.encode(loginUser),
+    var response = await http.post(Uri.https('10.0.2.2:5001', '/api/Auth/login'),
+        body: json.encode(authRequest),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         }
       );
+    var jsonData = null;
     if(response.statusCode == 200){
+      print(response.body);
       jsonData = json.decode(response.body);
       setState(() {
         print(response.body);

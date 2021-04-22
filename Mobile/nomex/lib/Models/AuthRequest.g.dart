@@ -1,19 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'User.dart';
+part of 'AuthRequest.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return User(
-    json['id'] as int?,
+AuthRequest _$AuthRequestFromJson(Map<String, dynamic> json) {
+  return AuthRequest(
     json['email'] as String,
+    json['password'] as String,
   );
 }
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'id': instance.id,
+Map<String, dynamic> _$AuthRequestToJson(AuthRequest instance) =>
+    <String, dynamic>{
       'email': instance.email,
+      'password': instance.password,
     };

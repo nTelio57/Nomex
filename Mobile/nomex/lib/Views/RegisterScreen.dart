@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:nomex/Models/AuthRequest.dart';
+import 'package:nomex/Models/AuthResponse.dart';
 import 'package:nomex/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -289,17 +291,22 @@ class _RegisterScreenState extends State<RegisterScreen>
     if(password != repeatPassword)
       return false;
 
-    final response = await http.post(Uri.https('10.0.2.2:5001', '/api/Users'),
+    var authRequest = new AuthRequest(email, password);
+    final response = await http.post(Uri.https('10.0.2.2:5001', '/api/Auth/register'),
         headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       },
-          body: json.encode(new User(0, email, password).toJson())
+          body: json.encode(authRequest.toJson())
     );
-    if(response.statusCode == 201){
-      User.currentLogin = User.fromJson(jsonDecode(response.body));
+
+    if(response.statusCode == 200){
+      print(response.body);
+      var responseBody = AuthResponse.fromJson(jsonDecode(response.body));
+      User.currentLogin = responseBody.user;
       continueRegistration();
       return true;
     }else{
+      print(response.body);
       throw Exception('Failed to register');
     }
   }
