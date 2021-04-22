@@ -212,7 +212,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
 
           });
         } ,
-        //padding: EdgeInsets.all(15.0),
         style: ElevatedButton.styleFrom(
           elevation: 5.0,
           padding: EdgeInsets.all(15.0),
@@ -221,16 +220,29 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
               borderRadius: BorderRadius.circular(30.0)
           ),
         ),
-        child: Text(
-          'CONTINUE',
-          style: TextStyle(
-              color: Colors.orange,
-              letterSpacing: 1.5,
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans'
-          ),
-        ),
+        child:
+        Stack(
+          children: [
+            Align(child: Icon(Icons.arrow_forward_ios_rounded,
+                  color: Colors.black,
+                  size: 25),
+              alignment: Alignment.centerRight
+            ),
+            Align(child: Text(
+              'CONTINUE',
+              style: TextStyle(
+                  color: Colors.orange,
+                  letterSpacing: 1.5,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans'
+              ),
+              textAlign: TextAlign.center,
+            ),
+              alignment: Alignment.center,
+            )
+          ],
+        )
       ),
     );
   }

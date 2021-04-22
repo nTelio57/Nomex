@@ -9,11 +9,12 @@ part of 'User.dart';
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     json['id'] as int?,
-    json['email'] as String,
-  )..personalDetails = json['personalDetails'] == null
-      ? null
-      : PersonalDetails.fromJson(
-          json['personalDetails'] as Map<String, dynamic>);
+  )
+    ..email = json['email'] as String?
+    ..personalDetails = json['personalDetails'] == null
+        ? null
+        : PersonalDetails.fromJson(
+            json['personalDetails'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

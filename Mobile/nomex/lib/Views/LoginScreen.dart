@@ -195,8 +195,11 @@ class _LoginScreenState extends State<LoginScreen>{
       print(response.body);
 
       setState(() {
-        sharedPreferences.setString("token", jsonData['token']);
         User user = User.fromJson(jsonData['user']);
+        sharedPreferences.setString("token", jsonData['token']);
+        sharedPreferences.setInt("id", user.id!);
+        User.currentLogin = user;
+
         if(user.personalDetails == null)
           Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => PersonalDetailsScreen()), (Route<dynamic> route) => false);
         else

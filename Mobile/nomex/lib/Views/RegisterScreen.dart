@@ -79,19 +79,6 @@ class _RegisterScreenState extends State<RegisterScreen>
                   SizedBox(height: 20.0),
                   _registerButton(),
                   _loginButton(),
-                  FutureBuilder<User>(
-                    future: futureUser,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(snapshot.data!.email);
-                      } else if (snapshot.hasError) {
-                        return Text("${snapshot.error}");
-                      }else if(!snapshot.hasData){
-                        return Text("No data");
-                      }
-                      return CircularProgressIndicator();
-                    }
-                  ),
                 ],
               ),
             ),
@@ -302,7 +289,7 @@ class _RegisterScreenState extends State<RegisterScreen>
     if(response.statusCode == 200){
       print(response.body);
       var responseBody = AuthResponse.fromJson(jsonDecode(response.body));
-      User.currentLogin = responseBody.user;
+      User.currentLogin = responseBody.user!;
       continueRegistration();
       return true;
     }else{

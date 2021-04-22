@@ -5,7 +5,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import 'Models/User.dart';
+import 'Views/HomeScreen.dart';
 import 'Views/WelcomeScreen.dart';
 
 void main() {
@@ -18,9 +21,34 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
-      home: WelcomeScreen(),
+      home: FutureBuilder<bool>(
+          future: checkLoginStatus(),
+        builder: (context, snapshot) {
+            if(snapshot.hasData)
+              {
+                if(snapshot.data!)
+                  return HomeScreen();
+                else
+                  return WelcomeScreen();
+              }
+            return CircularProgressIndicator();
+        },
+      ),
     );
   }
+
+  Future<bool> checkLoginStatus() async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var id = sharedPreferences.getInt("id");
+
+    if(sharedPreferences.getString("token") != null){
+      User.currentLogin.id = id;
+      return true;
+    }else
+      return false;
+  }
+
 }
 
 class MyHttpOverrides extends HttpOverrides{
