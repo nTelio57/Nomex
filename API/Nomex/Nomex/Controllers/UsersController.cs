@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Nomex.Data;
 using Nomex.Dtos;
@@ -13,6 +14,7 @@ using Nomex.Utilities;
 
 namespace Nomex.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -56,20 +58,6 @@ namespace Nomex.Controllers
             var userReadDto = _mapper.Map<UserReadDto>(userModel);
 
             return CreatedAtRoute(nameof(GetUserById), new {Id = userReadDto.Id}, userReadDto);
-        }
-
-        [HttpPost("login")]
-        public ActionResult<AuthToken> Login(UserCreateDto userCreateDto)
-        {
-            var userModel = _mapper.Map<User>(userCreateDto);
-
-            User account = _repository.GetUserByEmail(userModel.Email);
-            if (account == null)
-                return NotFound();
-            if (Crypto.CompareHash(Crypto.Hash(userModel.Password), account.Password) == false)
-                return NotFound();
-
-            return Ok(new AuthToken() { Token = "thisIsToken9579"});
         }
 
         [HttpPut("{id}")]

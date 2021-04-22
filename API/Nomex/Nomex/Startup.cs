@@ -82,6 +82,8 @@ namespace Nomex
             Configuration.Bind(nameof(jwtSettings), jwtSettings);
             services.AddSingleton(jwtSettings);
 
+            services.AddScoped<IAuthRepo>(sp => new AuthRepository(sp.GetService<NomexContext>(), jwtSettings.Secret));
+
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
