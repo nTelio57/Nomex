@@ -15,10 +15,6 @@ namespace Nomex.Auth
     public class AuthRepository : IAuthRepo
     {
         private readonly NomexContext _context;
-        private readonly IDictionary<string, string> users = new Dictionary<string, string>
-        {
-            {"test1", "password1"}, {"test2", "password2"}
-        };
 
         private readonly string _key;
 

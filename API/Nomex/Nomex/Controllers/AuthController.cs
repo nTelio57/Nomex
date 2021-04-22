@@ -24,15 +24,6 @@ namespace Nomex.Auth
             _mapper = mapper;
         }
 
-        /*[HttpPost("authenticate")]
-        public IActionResult Authenticate(AuthRequest authRequest)
-        {
-            var token = _repository.Authenticate(authRequest.Email, authRequest.Password);
-            if (token == null)
-                return Unauthorized();
-            return Ok(token);
-        }*/
-
         [HttpPost("register")]
         public ActionResult Register(AuthRequest authRequest)
         {
