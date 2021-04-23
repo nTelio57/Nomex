@@ -17,12 +17,14 @@ namespace Nomex.Controllers
     [ApiController]
     public class UserPersonalController : ControllerBase
     {
+        private readonly IUserRepo _userRepository;
         private readonly IUserPersonalRepo _repository;
         private readonly IMapper _mapper;
 
-        public UserPersonalController(IUserPersonalRepo repository, IMapper mapper)
+        public UserPersonalController(IUserPersonalRepo repository, IUserRepo userRepository, IMapper mapper)
         {
             _repository = repository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -43,7 +45,7 @@ namespace Nomex.Controllers
             return Ok(_mapper.Map<UserPersonalReadDto>(userPersonalItem));
         }
 
-        [HttpPost]
+        [HttpPost("for-user")]
         public ActionResult<UserPersonalCreateDto> CreateUserPersonal(UserPersonalCreateDto userPersonalCreateDto)
         {
             var userPersonalModel = _mapper.Map<UserPersonal>(userPersonalCreateDto);
@@ -52,6 +54,9 @@ namespace Nomex.Controllers
             _repository.SaveChanges();
 
             var userPersonalReadDto = _mapper.Map<UserPersonalReadDto>(userPersonalModel);
+
+            _userRepository.AddUserPersonal(userPersonalCreateDto.UserId, userPersonalReadDto.Id);
+            _userRepository.SaveChanges();
 
             return CreatedAtRoute(nameof(GetUserPersonalById), new {Id = userPersonalReadDto.Id}, userPersonalReadDto);
         }

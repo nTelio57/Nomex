@@ -5,6 +5,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:nomex/Views/PersonalDetailsScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Models/User.dart';
@@ -21,12 +22,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
-      home: FutureBuilder<bool>(
+      home: FutureBuilder<LoginType>(
           future: checkLoginStatus(),
         builder: (context, snapshot) {
             if(snapshot.hasData)
               {
-                if(snapshot.data!)
+                if(snapshot.data! == LoginType.PersonalDetails)
+                  return PersonalDetailsScreen();
+                else if(snapshot.data! == LoginType.FullLogin)
                   return HomeScreen();
                 else
                   return WelcomeScreen();
@@ -37,18 +40,27 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Future<bool> checkLoginStatus() async{
+  Future<LoginType> checkLoginStatus() async{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     var id = sharedPreferences.getInt("id");
+    var personalInfoExist = sharedPreferences.getBool("personalInfoExist");
 
-    if(sharedPreferences.getString("token") != null){
+    if(token != null){
       User.currentLogin.id = id;
-      return true;
+      if(personalInfoExist != null && personalInfoExist)
+        return LoginType.FullLogin;
+      return LoginType.PersonalDetails;
     }else
-      return false;
+      return LoginType.Welcome;
   }
 
+}
+
+enum LoginType{
+  Welcome,
+  PersonalDetails,
+  FullLogin
 }
 
 class MyHttpOverrides extends HttpOverrides{

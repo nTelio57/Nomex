@@ -56,5 +56,10 @@ namespace Nomex.Data
 
             _context.Users.Remove(user);
         }
+
+        public void AddUserPersonal(int userId, int userPersonalId)
+        {
+            GetUserById(userId).PersonalDetailsId = userPersonalId;
+        }
     }
 }

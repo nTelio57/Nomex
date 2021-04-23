@@ -17,6 +17,7 @@ namespace Nomex.Data
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
+        void AddUserPersonal(int userId, int userPersonalId);
 
 
     }
