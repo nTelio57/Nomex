@@ -4,13 +4,14 @@ part 'PersonalDetails.g.dart';
 
 @JsonSerializable()
 class PersonalDetails{
-  int id;
+  int? id;
   String name;
   String surname;
   String personalCode;
   DateTime birthDate;
+  int? userId;
 
-  PersonalDetails(this.id, this.name, this.surname, this.personalCode, this.birthDate);
+  PersonalDetails(this.name, this.surname, this.personalCode, this.birthDate);
 
   factory PersonalDetails.fromJson(Map<String, dynamic> json) => _$PersonalDetailsFromJson(json);
 

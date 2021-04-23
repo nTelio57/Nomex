@@ -8,11 +8,9 @@ namespace Nomex.Dtos.UserPersonal
     public class UserPersonalCreateDto
     {
         public string Name { get; set; }
-
         public string Surname { get; set; }
-
         public string PersonalCode { get; set; }
-
         public DateTime BirthDate { get; set; }
+        public int UserId { get; set; }
     }
 }

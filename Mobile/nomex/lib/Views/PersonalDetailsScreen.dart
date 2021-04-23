@@ -1,6 +1,14 @@
 
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:nomex/Models/PersonalDetails.dart';
+import 'package:nomex/Models/User.dart';
+import 'package:nomex/Views/HomeScreen.dart';
 import 'package:nomex/utilities/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
   @override
@@ -9,7 +17,9 @@ class PersonalDetailsScreen extends StatefulWidget {
 
 class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
 {
-  final TextEditingController _emailText = TextEditingController();
+  final TextEditingController _nameText = TextEditingController();
+  final TextEditingController _surnameText = TextEditingController();
+  final TextEditingController _personalCodeText = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
   @override
@@ -59,7 +69,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
                   SizedBox(height: 30.0),
                   _personalCodeField(),
                   SizedBox(height: 20.0),
-                  //_birthDateField(),
+                  _birthDateField(),
                   _continueButton(),
                 ],
               ),
@@ -84,7 +94,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
         height: 60.0,
         child: TextField(
           keyboardType: TextInputType.emailAddress,
-          controller: _emailText,
+          controller: _nameText,
           style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans'
@@ -119,7 +129,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
         height: 60.0,
         child: TextField(
           keyboardType: TextInputType.emailAddress,
-          controller: _emailText,
+          controller: _surnameText,
           style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans'
@@ -154,7 +164,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
         height: 60.0,
         child: TextField(
           keyboardType: TextInputType.emailAddress,
-          controller: _emailText,
+          controller: _personalCodeText,
           style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans'
@@ -179,12 +189,19 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
   {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        "Name",
+        "Birth date",
         style: kLabelStyle,
       ),
+      SizedBox(height: 20.0),
+      SizedBox(
+        height: 100,
+          child: CupertinoDatePicker(
+            mode: CupertinoDatePickerMode.date,
+            onDateTimeChanged: (dateTime) => setState(() => this.selectedDate = dateTime),
+      )
+      ),
       SizedBox(height: 10.0),
-
-    ],
+      ],
     );
   }
 
@@ -208,6 +225,7 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
       child: ElevatedButton(
         onPressed: () {
           print('Continue clicked');
+          createPersonalDetails(_nameText.text, _surnameText.text, _personalCodeText.text, selectedDate);
           setState(() {
 
           });
@@ -245,6 +263,33 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen>
         )
       ),
     );
+  }
+
+  Future createPersonalDetails(String name, String surname, String personalCode, DateTime birthDate) async
+  {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    var token = '';
+    token = sharedPreferences.getString('token')!;
+
+    var newPersonalDetails = new PersonalDetails(name, surname, personalCode, birthDate);
+    newPersonalDetails.userId = User.currentLogin.id;
+    final response = await http.post(Uri.https('10.0.2.2:5001', '/api/UserPersonal/for-user'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'bearer ' + token
+        },
+        body: json.encode(newPersonalDetails.toJson())
+    );
+
+    if(response.statusCode == 201){
+      print(response.body);
+      sharedPreferences.setBool("personalInfoExist", true);
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()), (Route<dynamic> route) => false);
+      return true;
+    }else{
+      print(response.body);
+      throw Exception('Failed to register');
+    }
   }
 
 }

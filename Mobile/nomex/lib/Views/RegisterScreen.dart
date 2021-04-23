@@ -5,6 +5,7 @@ import 'package:nomex/Models/AuthRequest.dart';
 import 'package:nomex/Models/AuthResponse.dart';
 import 'package:nomex/utilities/constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:async';
 
@@ -28,7 +29,6 @@ class _RegisterScreenState extends State<RegisterScreen>
   void initState()
   {
     super.initState();
-    futureUser = fetchUser();
   }
 
   @override
@@ -259,20 +259,6 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
   }
 
-
-
-  Future<User> fetchUser() async {
-    final response = await http.get(Uri.https('10.0.2.2:5001', '/api/Users/1'));
-
-
-    if(response.statusCode == 200)
-      {
-        return User.fromJson(jsonDecode(response.body));
-      }else{
-      throw Exception('Failed to load user');
-    }
-  }
-
   Future<bool> registerUser(String email, String password, String repeatPassword) async
   {
     if(password != repeatPassword)
@@ -290,6 +276,11 @@ class _RegisterScreenState extends State<RegisterScreen>
       print(response.body);
       var responseBody = AuthResponse.fromJson(jsonDecode(response.body));
       User.currentLogin = responseBody.user!;
+
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setString("token", responseBody.token!);
+      sharedPreferences.setInt("id", User.currentLogin.id!);
+      sharedPreferences.setBool("personalInfoExist", false);
       continueRegistration();
       return true;
     }else{

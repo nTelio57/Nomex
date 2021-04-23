@@ -198,6 +198,7 @@ class _LoginScreenState extends State<LoginScreen>{
         User user = User.fromJson(jsonData['user']);
         sharedPreferences.setString("token", jsonData['token']);
         sharedPreferences.setInt("id", user.id!);
+        sharedPreferences.setBool("personalInfoExist", user.personalDetails != null);
         User.currentLogin = user;
 
         if(user.personalDetails == null)
