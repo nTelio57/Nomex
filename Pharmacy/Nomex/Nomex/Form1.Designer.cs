@@ -29,6 +29,7 @@ namespace Nomex
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.BasePanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -41,13 +42,17 @@ namespace Nomex
             this.NewUserButton = new System.Windows.Forms.Button();
             this.NameLabel = new System.Windows.Forms.Label();
             this.MedicineBagPanel = new System.Windows.Forms.Panel();
+            this.MedicineBagTable = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Medicine = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClearMedicinesButton = new System.Windows.Forms.Button();
-            this.MedicineBagTable = new System.Windows.Forms.TableLayoutPanel();
             this.NewMedicineButton = new System.Windows.Forms.Button();
             this.BasePanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.UserPanel.SuspendLayout();
             this.MedicineBagPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MedicineBagTable)).BeginInit();
             this.SuspendLayout();
             // 
             // BasePanel
@@ -151,14 +156,64 @@ namespace Nomex
             // 
             // MedicineBagPanel
             // 
-            this.MedicineBagPanel.Controls.Add(this.ClearMedicinesButton);
             this.MedicineBagPanel.Controls.Add(this.MedicineBagTable);
+            this.MedicineBagPanel.Controls.Add(this.ClearMedicinesButton);
             this.MedicineBagPanel.Controls.Add(this.NewMedicineButton);
             this.MedicineBagPanel.Location = new System.Drawing.Point(24, 24);
             this.MedicineBagPanel.Margin = new System.Windows.Forms.Padding(0);
             this.MedicineBagPanel.Name = "MedicineBagPanel";
             this.MedicineBagPanel.Size = new System.Drawing.Size(647, 609);
             this.MedicineBagPanel.TabIndex = 0;
+            // 
+            // MedicineBagTable
+            // 
+            this.MedicineBagTable.AllowUserToAddRows = false;
+            this.MedicineBagTable.AllowUserToDeleteRows = false;
+            this.MedicineBagTable.AllowUserToResizeColumns = false;
+            this.MedicineBagTable.AllowUserToResizeRows = false;
+            this.MedicineBagTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.MedicineBagTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.MedicineBagTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Medicine,
+            this.Barcode});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.MedicineBagTable.DefaultCellStyle = dataGridViewCellStyle1;
+            this.MedicineBagTable.Location = new System.Drawing.Point(15, 58);
+            this.MedicineBagTable.Name = "MedicineBagTable";
+            this.MedicineBagTable.ReadOnly = true;
+            this.MedicineBagTable.RowHeadersVisible = false;
+            this.MedicineBagTable.RowHeadersWidth = 4;
+            this.MedicineBagTable.RowTemplate.Height = 25;
+            this.MedicineBagTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.MedicineBagTable.Size = new System.Drawing.Size(606, 551);
+            this.MedicineBagTable.TabIndex = 3;
+            // 
+            // Id
+            // 
+            this.Id.FillWeight = 10F;
+            this.Id.HeaderText = "#";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            // 
+            // Medicine
+            // 
+            this.Medicine.HeaderText = "Pavadinimas";
+            this.Medicine.Name = "Medicine";
+            this.Medicine.ReadOnly = true;
+            // 
+            // Barcode
+            // 
+            this.Barcode.FillWeight = 50F;
+            this.Barcode.HeaderText = "Prekės kodas";
+            this.Barcode.Name = "Barcode";
+            this.Barcode.ReadOnly = true;
             // 
             // ClearMedicinesButton
             // 
@@ -169,23 +224,6 @@ namespace Nomex
             this.ClearMedicinesButton.TabIndex = 2;
             this.ClearMedicinesButton.Text = "Išvalyti krepšelį";
             this.ClearMedicinesButton.UseVisualStyleBackColor = true;
-            // 
-            // MedicineBagTable
-            // 
-            this.MedicineBagTable.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.MedicineBagTable.ColumnCount = 4;
-            this.MedicineBagTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.MedicineBagTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.MedicineBagTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.MedicineBagTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.MedicineBagTable.Location = new System.Drawing.Point(15, 58);
-            this.MedicineBagTable.Margin = new System.Windows.Forms.Padding(5);
-            this.MedicineBagTable.Name = "MedicineBagTable";
-            this.MedicineBagTable.RowCount = 2;
-            this.MedicineBagTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.MedicineBagTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.MedicineBagTable.Size = new System.Drawing.Size(569, 551);
-            this.MedicineBagTable.TabIndex = 1;
             // 
             // NewMedicineButton
             // 
@@ -217,6 +255,7 @@ namespace Nomex
             this.UserPanel.ResumeLayout(false);
             this.UserPanel.PerformLayout();
             this.MedicineBagPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MedicineBagTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,7 +264,6 @@ namespace Nomex
 
         private System.Windows.Forms.Panel BasePanel;
         private System.Windows.Forms.Panel MedicineBagPanel;
-        private System.Windows.Forms.TableLayoutPanel MedicineBagTable;
         private System.Windows.Forms.Button NewMedicineButton;
         private System.Windows.Forms.Panel UserPanel;
         private System.Windows.Forms.Label NameLabel;
@@ -237,6 +275,10 @@ namespace Nomex
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button NewUserButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView MedicineBagTable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Medicine;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Barcode;
     }
 }
 
