@@ -34,6 +34,7 @@ namespace Nomex
             }
             else
             {
+                label2.Visible = true;
                 errorProvider1.SetError(label1, "Prekės kodas nerastas");
             }
             

@@ -35,6 +35,7 @@ namespace Nomex
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@ namespace Nomex
             // 
             this.MedicineBarcodeText.Location = new System.Drawing.Point(38, 47);
             this.MedicineBarcodeText.Name = "MedicineBarcodeText";
+            this.MedicineBarcodeText.PlaceholderText = "Prekės kodas";
             this.MedicineBarcodeText.Size = new System.Drawing.Size(302, 23);
             this.MedicineBarcodeText.TabIndex = 1;
             // 
@@ -80,11 +82,24 @@ namespace Nomex
             this.errorProvider1.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorProvider1.ContainerControl = this;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(211, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 15);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Prekės kodas nerastas";
+            this.label2.Visible = false;
+            // 
             // AddMedicineDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 191);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.MedicineBarcodeText);
@@ -106,5 +121,6 @@ namespace Nomex
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label2;
     }
 }

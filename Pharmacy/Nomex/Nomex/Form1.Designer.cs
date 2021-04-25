@@ -131,7 +131,7 @@ namespace Nomex
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 52);
             this.button1.TabIndex = 5;
-            this.button1.Text = "Užbaigti krepšelį";
+            this.button1.Text = "Išsaugoti krepšelį";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // NewUserButton

@@ -22,7 +22,6 @@ namespace Nomex
             _client = new HttpClient {BaseAddress = new Uri(APIUrl) };
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _client.DefaultRequestHeaders.Add("Authorization", " bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbnRhczNAZ21haWwuY29tIiwibmJmIjoxNjE5MzA3NDI3LCJleHAiOjE2MjE4OTk0MjcsImlhdCI6MTYxOTMwNzQyN30.RW6O07crbug81rdw2YBSTsaPh_wQDXn2rpwT1NF40JU");
-            
         }
 
         public Medicine GetMedicineByBarcode(string code)
