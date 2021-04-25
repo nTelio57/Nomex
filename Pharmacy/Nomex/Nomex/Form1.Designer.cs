@@ -33,10 +33,13 @@ namespace Nomex
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.BasePanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.MedicineTitleLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.DosageComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.DosageLabel = new System.Windows.Forms.Label();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.UsageDescriptionText = new System.Windows.Forms.RichTextBox();
             this.UserPanel = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.NewUserButton = new System.Windows.Forms.Button();
@@ -67,20 +70,71 @@ namespace Nomex
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.MedicineTitleLabel);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.checkedListBox1);
+            this.panel1.Controls.Add(this.DosageComboBox);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.DosageLabel);
-            this.panel1.Controls.Add(this.richTextBox2);
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Location = new System.Drawing.Point(674, 164);
+            this.panel1.Controls.Add(this.UsageDescriptionText);
+            this.panel1.Location = new System.Drawing.Point(674, 136);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(543, 469);
+            this.panel1.Size = new System.Drawing.Size(543, 497);
             this.panel1.TabIndex = 2;
+            // 
+            // MedicineTitleLabel
+            // 
+            this.MedicineTitleLabel.AutoSize = true;
+            this.MedicineTitleLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.MedicineTitleLabel.Location = new System.Drawing.Point(13, 23);
+            this.MedicineTitleLabel.Name = "MedicineTitleLabel";
+            this.MedicineTitleLabel.Size = new System.Drawing.Size(166, 37);
+            this.MedicineTitleLabel.TabIndex = 8;
+            this.MedicineTitleLabel.Text = "Mezym 200";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(215, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(144, 19);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Kuriuo laiku vartoti?";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.CheckOnClick = true;
+            this.checkedListBox1.ColumnWidth = 75;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Items.AddRange(new object[] {
+            "08:00",
+            "10:00",
+            "12:00",
+            "14:00",
+            "16:00",
+            "18:00",
+            "20:00",
+            "22:00"});
+            this.checkedListBox1.Location = new System.Drawing.Point(215, 102);
+            this.checkedListBox1.MultiColumn = true;
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(156, 76);
+            this.checkedListBox1.TabIndex = 6;
+            // 
+            // DosageComboBox
+            // 
+            this.DosageComboBox.FormattingEnabled = true;
+            this.DosageComboBox.Location = new System.Drawing.Point(13, 102);
+            this.DosageComboBox.Name = "DosageComboBox";
+            this.DosageComboBox.Size = new System.Drawing.Size(121, 23);
+            this.DosageComboBox.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(13, 148);
+            this.label1.Location = new System.Drawing.Point(13, 180);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 19);
             this.label1.TabIndex = 4;
@@ -90,29 +144,20 @@ namespace Nomex
             // 
             this.DosageLabel.AutoSize = true;
             this.DosageLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.DosageLabel.Location = new System.Drawing.Point(13, 11);
+            this.DosageLabel.Location = new System.Drawing.Point(13, 80);
             this.DosageLabel.Name = "DosageLabel";
             this.DosageLabel.Size = new System.Drawing.Size(98, 19);
             this.DosageLabel.TabIndex = 3;
             this.DosageLabel.Text = "Kada vartoti?";
             // 
-            // richTextBox2
+            // UsageDescriptionText
             // 
-            this.richTextBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox2.Location = new System.Drawing.Point(13, 33);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(530, 112);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox1.Location = new System.Drawing.Point(13, 170);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(530, 299);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.UsageDescriptionText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UsageDescriptionText.Location = new System.Drawing.Point(13, 202);
+            this.UsageDescriptionText.Name = "UsageDescriptionText";
+            this.UsageDescriptionText.Size = new System.Drawing.Size(530, 141);
+            this.UsageDescriptionText.TabIndex = 2;
+            this.UsageDescriptionText.Text = "";
             // 
             // UserPanel
             // 
@@ -121,15 +166,15 @@ namespace Nomex
             this.UserPanel.Controls.Add(this.NameLabel);
             this.UserPanel.Location = new System.Drawing.Point(674, 24);
             this.UserPanel.Name = "UserPanel";
-            this.UserPanel.Size = new System.Drawing.Size(543, 134);
+            this.UserPanel.Size = new System.Drawing.Size(543, 106);
             this.UserPanel.TabIndex = 1;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(412, 6);
+            this.button1.Location = new System.Drawing.Point(412, 5);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(131, 52);
+            this.button1.Size = new System.Drawing.Size(131, 84);
             this.button1.TabIndex = 5;
             this.button1.Text = "Išsaugoti krepšelį";
             this.button1.UseVisualStyleBackColor = true;
@@ -137,7 +182,7 @@ namespace Nomex
             // NewUserButton
             // 
             this.NewUserButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.NewUserButton.Location = new System.Drawing.Point(13, 17);
+            this.NewUserButton.Location = new System.Drawing.Point(13, 58);
             this.NewUserButton.Name = "NewUserButton";
             this.NewUserButton.Size = new System.Drawing.Size(139, 31);
             this.NewUserButton.TabIndex = 1;
@@ -148,7 +193,7 @@ namespace Nomex
             // 
             this.NameLabel.AutoSize = true;
             this.NameLabel.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NameLabel.Location = new System.Drawing.Point(13, 58);
+            this.NameLabel.Location = new System.Drawing.Point(13, 5);
             this.NameLabel.Name = "NameLabel";
             this.NameLabel.Size = new System.Drawing.Size(203, 41);
             this.NameLabel.TabIndex = 0;
@@ -194,6 +239,7 @@ namespace Nomex
             this.MedicineBagTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.MedicineBagTable.Size = new System.Drawing.Size(606, 551);
             this.MedicineBagTable.TabIndex = 3;
+            this.MedicineBagTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MedicineBagTable_CellClick);
             // 
             // Medicine
             // 
@@ -273,14 +319,17 @@ namespace Nomex
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label DosageLabel;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox UsageDescriptionText;
         private System.Windows.Forms.Button NewUserButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView MedicineBagTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn Medicine;
         private System.Windows.Forms.DataGridViewTextBoxColumn Barcode;
         private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.ComboBox DosageComboBox;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label MedicineTitleLabel;
     }
 }
 

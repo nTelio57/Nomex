@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Nomex.Models;
 
 namespace Nomex
 {
@@ -14,6 +15,7 @@ namespace Nomex
         public string Name { get; set; }
         public DateTime ExpireDate { get; set; }
         public bool IsCompensated { get; set; }
+        public Usage usageTemplate { get; set; }
 
     }
 }

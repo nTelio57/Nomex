@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Nomex.Models;
 
 namespace Nomex.Data
@@ -20,7 +22,7 @@ namespace Nomex.Data
 
         public IEnumerable<Medicine> GetAllMedicines()
         {
-            return _context.Medicines.ToList();
+            return _context.Medicines.Include(x => x.UsageTemplate).ToList();
         }
 
         public Medicine GetMedicineById(int id)
@@ -30,7 +32,11 @@ namespace Nomex.Data
 
         public Medicine GetMedicineByBarcode(string barcode)
         {
-            return _context.Medicines.FirstOrDefault(p => p.Barcode.Equals(barcode));
+            Medicine medicine = _context.Medicines.FirstOrDefault(p => p.Barcode.Equals(barcode));
+            if (medicine == null)
+                return null;
+            medicine.UsageTemplate = _context.Usages.FirstOrDefault(p => p.Id == medicine.UsageTemplateId);
+            return medicine;
         }
 
         public void CreateMedicine(Medicine medicine)
