@@ -43,9 +43,9 @@ namespace Nomex
             this.NameLabel = new System.Windows.Forms.Label();
             this.MedicineBagPanel = new System.Windows.Forms.Panel();
             this.MedicineBagTable = new System.Windows.Forms.DataGridView();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Medicine = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClearMedicinesButton = new System.Windows.Forms.Button();
             this.NewMedicineButton = new System.Windows.Forms.Button();
             this.BasePanel.SuspendLayout();
@@ -174,9 +174,9 @@ namespace Nomex
             this.MedicineBagTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.MedicineBagTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MedicineBagTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
             this.Medicine,
-            this.Barcode});
+            this.Barcode,
+            this.Price});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -195,13 +195,6 @@ namespace Nomex
             this.MedicineBagTable.Size = new System.Drawing.Size(606, 551);
             this.MedicineBagTable.TabIndex = 3;
             // 
-            // Id
-            // 
-            this.Id.FillWeight = 10F;
-            this.Id.HeaderText = "#";
-            this.Id.Name = "Id";
-            this.Id.ReadOnly = true;
-            // 
             // Medicine
             // 
             this.Medicine.HeaderText = "Pavadinimas";
@@ -215,6 +208,13 @@ namespace Nomex
             this.Barcode.Name = "Barcode";
             this.Barcode.ReadOnly = true;
             // 
+            // Price
+            // 
+            this.Price.FillWeight = 20F;
+            this.Price.HeaderText = "Kaina";
+            this.Price.Name = "Price";
+            this.Price.ReadOnly = true;
+            // 
             // ClearMedicinesButton
             // 
             this.ClearMedicinesButton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -224,6 +224,7 @@ namespace Nomex
             this.ClearMedicinesButton.TabIndex = 2;
             this.ClearMedicinesButton.Text = "Išvalyti krepšelį";
             this.ClearMedicinesButton.UseVisualStyleBackColor = true;
+            this.ClearMedicinesButton.Click += new System.EventHandler(this.ClearMedicinesButton_Click);
             // 
             // NewMedicineButton
             // 
@@ -236,6 +237,7 @@ namespace Nomex
             this.NewMedicineButton.TabIndex = 0;
             this.NewMedicineButton.Text = "Pridėti vaistą";
             this.NewMedicineButton.UseVisualStyleBackColor = false;
+            this.NewMedicineButton.Click += new System.EventHandler(this.NewMedicineButton_Click);
             // 
             // Form1
             // 
@@ -276,9 +278,9 @@ namespace Nomex
         private System.Windows.Forms.Button NewUserButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView MedicineBagTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Medicine;
         private System.Windows.Forms.DataGridViewTextBoxColumn Barcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
     }
 }
 
