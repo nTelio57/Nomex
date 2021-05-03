@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Nomex.Models;
 
 namespace Nomex.Data
@@ -21,12 +23,12 @@ namespace Nomex.Data
 
         public IEnumerable<Recipe> GetAllRecipesByUserId(int userId)
         {
-            return _context.Recipes.ToList().Where(c => c.UserId == userId);
+            return _context.Recipes.Include(x => x.Medicine).Include(x => x.Usage).ToList().Where(c => c.UserId == userId);
         }
 
         public Recipe GetRecipeById(int id)
         {
-            return _context.Recipes.FirstOrDefault(c => c.Id == id);
+            return _context.Recipes.Include(x => x.Medicine).Include(x => x.Usage).FirstOrDefault(c => c.Id == id);
         }
 
         public void CreateRecipe(Recipe recipe)

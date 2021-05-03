@@ -42,10 +42,10 @@ namespace Nomex.Data
 
         void SeedUsage(ModelBuilder modelBuilder)
         {
-            var usage1 = new Usage { Id = 1, Description = "Aprašymas vienas", Dosage = Dosage.OnceADay};
-            var usage2 = new Usage { Id = 2, Description = "Aprašymas du", Dosage = Dosage.OnceADay};
+            var usage1 = new Usage { Id = 1, Description = "Aprašymas vienas", Dosage = Dosage.Daily};
+            var usage2 = new Usage { Id = 2, Description = "Aprašymas du", Dosage = Dosage.Every2Weeks };
             var usage3 = new Usage { Id = 3, Description = "Aprašymas trys", Dosage = Dosage.OnceAWeek};
-            var usage4 = new Usage { Id = 4, Description = "Aprašymas keturi", Dosage = Dosage.TriceADay};
+            var usage4 = new Usage { Id = 4, Description = "Aprašymas keturi", Dosage = Dosage.OnceAMonth};
 
             modelBuilder.Entity<Usage>().HasData(usage1, usage2, usage3, usage4);
         }
