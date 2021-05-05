@@ -129,6 +129,7 @@ namespace Nomex
             this.DosageComboBox.Name = "DosageComboBox";
             this.DosageComboBox.Size = new System.Drawing.Size(121, 23);
             this.DosageComboBox.TabIndex = 5;
+            this.DosageComboBox.SelectedIndexChanged += new System.EventHandler(this.DosageComboBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -158,6 +159,7 @@ namespace Nomex
             this.UsageDescriptionText.Size = new System.Drawing.Size(530, 141);
             this.UsageDescriptionText.TabIndex = 2;
             this.UsageDescriptionText.Text = "";
+            this.UsageDescriptionText.TextChanged += new System.EventHandler(this.UsageDescriptionText_TextChanged);
             // 
             // UserPanel
             // 
@@ -178,6 +180,7 @@ namespace Nomex
             this.button1.TabIndex = 5;
             this.button1.Text = "Išsaugoti krepšelį";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // NewUserButton
             // 
@@ -188,6 +191,7 @@ namespace Nomex
             this.NewUserButton.TabIndex = 1;
             this.NewUserButton.Text = "Įvesti vartotojo kodą";
             this.NewUserButton.UseVisualStyleBackColor = true;
+            this.NewUserButton.Click += new System.EventHandler(this.NewUserButton_Click);
             // 
             // NameLabel
             // 
@@ -213,7 +217,6 @@ namespace Nomex
             // MedicineBagTable
             // 
             this.MedicineBagTable.AllowUserToAddRows = false;
-            this.MedicineBagTable.AllowUserToDeleteRows = false;
             this.MedicineBagTable.AllowUserToResizeColumns = false;
             this.MedicineBagTable.AllowUserToResizeRows = false;
             this.MedicineBagTable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -240,6 +243,7 @@ namespace Nomex
             this.MedicineBagTable.Size = new System.Drawing.Size(606, 551);
             this.MedicineBagTable.TabIndex = 3;
             this.MedicineBagTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.MedicineBagTable_CellClick);
+            this.MedicineBagTable.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.MedicineBagTable_UserDeletedRow);
             // 
             // Medicine
             // 
