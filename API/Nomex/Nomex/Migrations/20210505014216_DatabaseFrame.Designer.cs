@@ -10,7 +10,7 @@ using Nomex.Data;
 namespace Nomex.Migrations
 {
     [DbContext(typeof(NomexContext))]
-    [Migration("20210417112512_DatabaseFrame")]
+    [Migration("20210505014216_DatabaseFrame")]
     partial class DatabaseFrame
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -238,19 +238,19 @@ namespace Nomex.Migrations
                         {
                             Id = 2,
                             Description = "Aprašymas du",
-                            Dosage = 0
+                            Dosage = 6
                         },
                         new
                         {
                             Id = 3,
                             Description = "Aprašymas trys",
-                            Dosage = 3
+                            Dosage = 5
                         },
                         new
                         {
                             Id = 4,
                             Description = "Aprašymas keturi",
-                            Dosage = 2
+                            Dosage = 7
                         });
                 });
 
@@ -261,64 +261,22 @@ namespace Nomex.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PersonalDetailsId")
-                        .HasColumnType("int");
+                    b.Property<string>("PersonalCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonalDetailsId")
-                        .IsUnique()
-                        .HasFilter("[PersonalDetailsId] IS NOT NULL");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "vienas@gmail.com",
-                            Password = "132456",
-                            Salt = "geras"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Email = "ddu@gmail.com",
-                            Password = "nesakysiu",
-                            Salt = "geresnis"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Email = "trys@gmail.com",
-                            Password = "kaunas",
-                            Salt = "geriausias"
-                        });
-                });
-
-            modelBuilder.Entity("Nomex.Models.UserPersonal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonalCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
@@ -326,31 +284,40 @@ namespace Nomex.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserPersonals");
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             BirthDate = new DateTime(1999, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vienas@gmail.com",
                             Name = "Mantas",
-                            PersonalCode = "191899",
+                            Password = "132456",
+                            PersonalCode = "3991108",
+                            Salt = "geras",
                             Surname = "Pabalys"
                         },
                         new
                         {
                             Id = 2,
                             BirthDate = new DateTime(2000, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ddu@gmail.com",
                             Name = "Arminas",
-                            PersonalCode = "6869869",
+                            Password = "nesakysiu",
+                            PersonalCode = "273289",
+                            Salt = "geresnis",
                             Surname = "Vilunas"
                         },
                         new
                         {
                             Id = 3,
                             BirthDate = new DateTime(2000, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "trys@gmail.com",
                             Name = "Marius",
-                            PersonalCode = "49844",
+                            Password = "kaunas",
+                            PersonalCode = "3793678",
+                            Salt = "geriausias",
                             Surname = "Gindriunas"
                         });
                 });
@@ -404,15 +371,6 @@ namespace Nomex.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Nomex.Models.User", b =>
-                {
-                    b.HasOne("Nomex.Models.UserPersonal", "PersonalDetails")
-                        .WithOne("User")
-                        .HasForeignKey("Nomex.Models.User", "PersonalDetailsId");
-
-                    b.Navigation("PersonalDetails");
-                });
-
             modelBuilder.Entity("Nomex.Models.ActiveSubstance", b =>
                 {
                     b.Navigation("Medicines");
@@ -426,11 +384,6 @@ namespace Nomex.Migrations
             modelBuilder.Entity("Nomex.Models.User", b =>
                 {
                     b.Navigation("Recipes");
-                });
-
-            modelBuilder.Entity("Nomex.Models.UserPersonal", b =>
-                {
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

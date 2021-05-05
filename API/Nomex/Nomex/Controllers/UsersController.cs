@@ -44,6 +44,15 @@ namespace Nomex.Controllers
             return NotFound();
         }
 
+        [HttpGet("by-personal-code/{personalCode}", Name = "GetUserByPersonalCode")]
+        public ActionResult<UserReadDto> GetUserByPersonalCode(string personalCode)
+        {
+            var userItem = _repository.GetUserByPersonalCode(personalCode);
+            if (userItem != null)
+                return Ok(_mapper.Map<UserReadDto>(userItem));
+            return NotFound();
+        }
+
         [HttpPost]
         public ActionResult<UserReadDto> CreateUser(UserCreateDto userCreateDto)
         {
@@ -51,6 +60,7 @@ namespace Nomex.Controllers
 
             userModel.Password = Crypto.Hash(userModel.Password);
             userModel.Salt = Crypto.GenerateSalt();
+            userModel.PersonalCode = Utils.GeneratePersonalCode();
 
             _repository.CreateUser(userModel);
             _repository.SaveChanges();

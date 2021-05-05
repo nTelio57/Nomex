@@ -36,19 +36,22 @@ namespace Nomex.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserPersonals",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PersonalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonalCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserPersonals", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,28 +75,6 @@ namespace Nomex.Migrations
                         name: "FK_Medicines_Usages_UsageTemplateId",
                         column: x => x.UsageTemplateId,
                         principalTable: "Usages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Salt = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PersonalDetailsId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_UserPersonals_PersonalDetailsId",
-                        column: x => x.PersonalDetailsId,
-                        principalTable: "UserPersonals",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -162,29 +143,19 @@ namespace Nomex.Migrations
                 values: new object[,]
                 {
                     { 1, "Aprašymas vienas", 0 },
-                    { 2, "Aprašymas du", 0 },
-                    { 3, "Aprašymas trys", 3 },
-                    { 4, "Aprašymas keturi", 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "UserPersonals",
-                columns: new[] { "Id", "BirthDate", "Name", "PersonalCode", "Surname" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(1999, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "Mantas", "191899", "Pabalys" },
-                    { 2, new DateTime(2000, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Arminas", "6869869", "Vilunas" },
-                    { 3, new DateTime(2000, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Marius", "49844", "Gindriunas" }
+                    { 2, "Aprašymas du", 6 },
+                    { 3, "Aprašymas trys", 5 },
+                    { 4, "Aprašymas keturi", 7 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Email", "Password", "PersonalDetailsId", "Salt" },
+                columns: new[] { "Id", "BirthDate", "Email", "Name", "Password", "PersonalCode", "Salt", "Surname" },
                 values: new object[,]
                 {
-                    { 1, "vienas@gmail.com", "132456", null, "geras" },
-                    { 2, "ddu@gmail.com", "nesakysiu", null, "geresnis" },
-                    { 3, "trys@gmail.com", "kaunas", null, "geriausias" }
+                    { 1, new DateTime(1999, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), "vienas@gmail.com", "Mantas", "132456", "3991108", "geras", "Pabalys" },
+                    { 2, new DateTime(2000, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "ddu@gmail.com", "Arminas", "nesakysiu", "273289", "geresnis", "Vilunas" },
+                    { 3, new DateTime(2000, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "trys@gmail.com", "Marius", "kaunas", "3793678", "geriausias", "Gindriunas" }
                 });
 
             migrationBuilder.InsertData(
@@ -234,13 +205,6 @@ namespace Nomex.Migrations
                 name: "IX_Recipes_UserId",
                 table: "Recipes",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_PersonalDetailsId",
-                table: "Users",
-                column: "PersonalDetailsId",
-                unique: true,
-                filter: "[PersonalDetailsId] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -262,9 +226,6 @@ namespace Nomex.Migrations
 
             migrationBuilder.DropTable(
                 name: "Usages");
-
-            migrationBuilder.DropTable(
-                name: "UserPersonals");
         }
     }
 }

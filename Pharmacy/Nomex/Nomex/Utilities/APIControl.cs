@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using Nomex.Models;
 
 namespace Nomex
 {
     public class APIControl
     {
         private const string APIUrl = "https://localhost:5001";
-        private const string MedicineByBarcodeUrl = "/api/Medicine/by-barcode/";
+        private const string GetMedicineByBarcodeUrl = "/api/Medicine/by-barcode/";
+        private const string GetUserByCodeUrl = "/api/Users/by-personal-code/";
+        private const string PostMedicineList = "/api/Recipe/list";
 
         private readonly HttpClient _client;
 
@@ -20,14 +25,33 @@ namespace Nomex
 
         public Medicine GetMedicineByBarcode(string code)
         {
-            HttpResponseMessage response = _client.GetAsync(MedicineByBarcodeUrl+code).Result;
+            HttpResponseMessage response = _client.GetAsync(GetMedicineByBarcodeUrl+code).Result;
             if (response.IsSuccessStatusCode)
             {
                 var dataObjects = response.Content.ReadAsAsync<Medicine>().Result;
                 return dataObjects;
             }
-            //Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
             return null;
+        }
+
+        public User GetUserByCode(string code)
+        {
+            HttpResponseMessage response = _client.GetAsync(GetUserByCodeUrl + code).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var dataObjects = response.Content.ReadAsAsync<User>().Result;
+                return dataObjects;
+            }
+            return null;
+        }
+
+        public bool PostRecipeListToUser(User currentUser, List<Recipe> recipeList)
+        {
+            foreach (Recipe r in recipeList)
+                r.UserId = currentUser.Id;
+            var content = new StringContent(recipeList.ToString(), Encoding.UTF8, "application/json");
+            var response = _client.PostAsJsonAsync(PostMedicineList, recipeList);
+            return response.Result.IsSuccessStatusCode;
         }
 
     }

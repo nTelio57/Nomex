@@ -38,12 +38,14 @@ namespace Nomex.Auth
             }
 
             var salt = Crypto.GenerateSalt();
+            var personalCode = Utils.GeneratePersonalCode();
 
             var newUser = new User
             {
                 Email = authRequest.Email,
                 Password = Crypto.Hash(authRequest.Password+salt),
-                Salt = salt
+                Salt = salt,
+                PersonalCode = personalCode
             };
 
             _repository.AddNewUser(newUser);

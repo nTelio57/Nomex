@@ -24,7 +24,6 @@ namespace Nomex.Data
         void SeedDb(ModelBuilder modelBuilder)
         {
             SeedUsers(modelBuilder);
-            SeedUserPersonal(modelBuilder);
             SeedMedicine(modelBuilder);
             SeedUsage(modelBuilder);
             SeedRecipe(modelBuilder);
@@ -61,26 +60,16 @@ namespace Nomex.Data
             modelBuilder.Entity<Medicine>().HasData(medicine1, medicine2, medicine3, medicine4, medicine5);
         }
 
-        void SeedUserPersonal(ModelBuilder modelBuilder)
-        {
-            var user1 = new UserPersonal { Id = 1, BirthDate = new DateTime(1999, 11, 08), Name = "Mantas", Surname = "Pabalys", PersonalCode = "191899"};
-            var user2 = new UserPersonal { Id = 2, BirthDate = new DateTime(2000, 10, 11), Name = "Arminas", Surname = "Vilunas", PersonalCode = "6869869" };
-            var user3 = new UserPersonal { Id = 3, BirthDate = new DateTime(2000, 04, 06), Name = "Marius", Surname = "Gindriunas", PersonalCode = "49844" };
-
-            modelBuilder.Entity<UserPersonal>().HasData(user1, user2, user3);
-        }
-
         void SeedUsers(ModelBuilder modelBuilder)
         {
-            var user1 = new User { Id = 1, Email = "vienas@gmail.com", Password = "132456", Salt = "geras", };
-            var user2 = new User { Id = 2, Email = "ddu@gmail.com", Password = "nesakysiu", Salt = "geresnis", };
-            var user3 = new User { Id = 3, Email = "trys@gmail.com", Password = "kaunas", Salt = "geriausias", };
+            var user1 = new User { Id = 1, Email = "mantas@gmail.com", Password = "r08fhHamhLI9qMfjLWZqMduOPvKfIJhCmmxIy53RMUI=", Salt = "/CAuKyuKhVVR5B6oLjfQwAzC9eJIhju0xubUPMPiyWQ=", PersonalCode = "3991108", BirthDate = new DateTime(1999, 11, 08), Name = "Mantas", Surname = "Pabalys" };
+            var user2 = new User { Id = 2, Email = "ddu@gmail.com", Password = "G9Jr7PFw0PecDsLlJhCM2LyxzWtKD40a/GmzAOqn77Y=", Salt = "p7JlJExiWZo/cR1sHBm2j1DPsTE8MXO3NAEWya9/Alo=", PersonalCode = "27329", BirthDate = new DateTime(2000, 10, 11), Name = "Arminas", Surname = "Vilunas" };
+            var user3 = new User { Id = 3, Email = "trys@gmail.com", Password = "s+PMYaajIcGUnVFcGWaRIRxV3nPUGL4i4aa2MWN2Gdc=", Salt = "qf9CdzHJz2V323ul6v/qbg87Enbqa84RyRcQhHpV4/A=", PersonalCode = "37978", BirthDate = new DateTime(2000, 04, 06), Name = "Marius", Surname = "Gindriunas" };
             
             modelBuilder.Entity<User>().HasData(user1, user2, user3);
         }
 
         public DbSet<User> Users{ get; set; }
-        public DbSet<UserPersonal> UserPersonals { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Usage> Usages { get; set; }
         public DbSet<Medicine> Medicines { get; set; }

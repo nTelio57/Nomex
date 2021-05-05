@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nomex.Dtos.UserPersonal;
 
 namespace Nomex.Dtos
 {
@@ -10,6 +9,9 @@ namespace Nomex.Dtos
     {
         public int Id { get; set; }
         public string Email { get; set; }
-        public UserPersonalReadDto PersonalDetails { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string PersonalCode { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 }

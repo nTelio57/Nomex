@@ -73,7 +73,6 @@ namespace Nomex
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IUserRepo, UserRepository>();
-            services.AddScoped<IUserPersonalRepo, UserPersonalRepository>();
             services.AddScoped<IMedicineRepo, MedicineRepository>();
             services.AddScoped<IUsageRepo, UsageRepository>();
             services.AddScoped<IRecipeRepo, RecipeRepository>();

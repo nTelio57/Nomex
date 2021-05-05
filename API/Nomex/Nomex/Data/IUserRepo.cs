@@ -13,11 +13,11 @@ namespace Nomex.Data
 
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
+        User GetUserByPersonalCode(string code);
         User GetUserByEmail(string email);
         void CreateUser(User user);
         void UpdateUser(User user);
         void DeleteUser(User user);
-        void AddUserPersonal(int userId, int userPersonalId);
 
 
     }
