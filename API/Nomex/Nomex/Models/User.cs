@@ -17,11 +17,10 @@ namespace Nomex.Models
         public string Password { get; set; }
         
         public string Salt { get; set; }
-
-        //Foreign key for personal details
-        [ForeignKey("PersonalDetails")]
-        public int? PersonalDetailsId { get; set; }
-        public UserPersonal PersonalDetails { get; set; }
+        public string PersonalCode { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public DateTime BirthDate { get; set; }
 
         //Recipes
         public ICollection<Recipe> Recipes { get; set; }

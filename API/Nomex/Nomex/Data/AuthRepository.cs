@@ -62,7 +62,6 @@ namespace Nomex.Auth
             User user =_context.Users.FirstOrDefault(x => x.Email == email);
             if (user == null || !user.Password.Equals(Crypto.Hash(password + user.Salt)))
                 return null;
-            user.PersonalDetails = _context.UserPersonals.FirstOrDefault(x => x.Id == user.PersonalDetailsId);
             return user;
         }
     }

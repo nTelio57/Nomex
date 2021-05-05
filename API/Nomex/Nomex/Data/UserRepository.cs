@@ -36,6 +36,11 @@ namespace Nomex.Data
             return _context.Users.FirstOrDefault(p => p.Id == id);
         }
 
+        public User GetUserByPersonalCode(string code)
+        {
+            return _context.Users.FirstOrDefault(p => p.PersonalCode.Equals(code));
+        }
+
         public void CreateUser(User user)
         {
             if(user == null)
@@ -55,11 +60,6 @@ namespace Nomex.Data
                 throw new ArgumentNullException(nameof(user));
 
             _context.Users.Remove(user);
-        }
-
-        public void AddUserPersonal(int userId, int userPersonalId)
-        {
-            GetUserById(userId).PersonalDetailsId = userPersonalId;
         }
     }
 }
