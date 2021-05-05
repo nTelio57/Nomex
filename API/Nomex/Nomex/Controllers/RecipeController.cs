@@ -81,5 +81,21 @@ namespace Nomex.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("list")]
+        public ActionResult AddRecipeList(ICollection<RecipeCreateDto> recipeListDto)
+        {
+            
+            foreach (var recipe in recipeListDto)
+            {
+                var recipeModel = _mapper.Map<Recipe>(recipe);
+
+                _repository.CreateRecipe(recipeModel);
+            }
+
+            _repository.SaveChanges();
+
+            return Ok();
+        }
     }
 }
