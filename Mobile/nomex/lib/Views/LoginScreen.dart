@@ -201,10 +201,7 @@ class _LoginScreenState extends State<LoginScreen>{
         sharedPreferences.setBool("personalInfoExist", user.personalDetails != null);
         User.currentLogin = user;
 
-        if(user.personalDetails == null)
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => PersonalDetailsScreen()), (Route<dynamic> route) => false);
-        else
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()), (Route<dynamic> route) => false);
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()), (Route<dynamic> route) => false);
       });
     }else
       {
