@@ -11,6 +11,10 @@ class User{
   int? id;
   String? email;
   PersonalDetails? personalDetails;
+  String? name;
+  String? surname;
+  String? personalCode;
+  DateTime? birthDate;
 
   User(this.id);
 

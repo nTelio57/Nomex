@@ -22,14 +22,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
+      theme: new ThemeData(canvasColor: Colors.orangeAccent),
       home: FutureBuilder<LoginType>(
           future: checkLoginStatus(),
         builder: (context, snapshot) {
             if(snapshot.hasData)
               {
-                if(snapshot.data! == LoginType.PersonalDetails)
-                  return PersonalDetailsScreen();
-                else if(snapshot.data! == LoginType.FullLogin)
+                if(!(snapshot.data! == LoginType.Welcome))
                   return HomeScreen();
                 else
                   return WelcomeScreen();
