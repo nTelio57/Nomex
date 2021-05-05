@@ -22,8 +22,8 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
-  'id': instance.id,
-  'validUntil': instance.validUntil?.toIso8601String(),
-  'usage': instance.usage,
-  'medicine': instance.medicine,
-};
+      'id': instance.id,
+      'validUntil': instance.validUntil?.toIso8601String(),
+      'usage': instance.usage,
+      'medicine': instance.medicine,
+    };

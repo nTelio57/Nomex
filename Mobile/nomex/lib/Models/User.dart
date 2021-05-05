@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nomex/Models/PersonalDetails.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'User.g.dart';
@@ -10,7 +9,6 @@ class User{
 
   int? id;
   String? email;
-  PersonalDetails? personalDetails;
   String? name;
   String? surname;
   String? personalCode;

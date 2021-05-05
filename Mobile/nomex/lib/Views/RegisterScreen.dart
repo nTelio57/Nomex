@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:async';
 
+import 'HomeScreen.dart';
 import 'LoginScreen.dart';
-import 'PersonalDetailsScreen.dart';
 import '../Models/User.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -294,7 +294,7 @@ class _RegisterScreenState extends State<RegisterScreen>
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PersonalDetailsScreen()
+            builder: (context) => HomeScreen()
         )
     );
   }
