@@ -35,21 +35,104 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: SideDrawer(),
-      body: Stack(
-          children:[
-            Background(),
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  color: Colors.white24,
-              ),
-              child: RecipeList(),
-            ),
-          ]
+      body: Base(),
+    );
+  }
+
+  Base()
+  {
+    return Container(
+        height: double.infinity,
+        width: double.infinity,
+        margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+        child: Column(
+          children: [
+            UserCard(),
+            RecipeBackground()
+          ],
+        ),
+    );
+  }
+
+  UserCard()
+  {
+    return Container(
+      height: 100,
+      width: 400,
+      padding: EdgeInsets.only(left: 20),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        color: Colors.red,
       ),
+      child: Row(
+        children: [
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  User.currentLogin.name!,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                   User.currentLogin.surname!,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerRight,
+            width: 245,
+            padding: EdgeInsets.only(right: 0),
+            child: Text(
+              User.currentLogin.personalCode!,
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      )
+    );
+  }
+
+  RecipeBackground()
+  {
+    return Container(
+      height: 550,
+      child: RecipeList(),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        color: Colors.white38,
+      ),
+    );
+
+    return Stack(
+        children:[
+          Background(),
+          Container(
+            margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+              color: Colors.white24,
+            ),
+            child: RecipeList(),
+          ),
+        ]
     );
   }
 
