@@ -42,12 +42,15 @@ class MyApp extends StatelessWidget {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     var id = sharedPreferences.getInt("id");
-    var personalInfoExist = sharedPreferences.getBool("personalInfoExist");
+    var name = sharedPreferences.getString("name");
+    var surname = sharedPreferences.getString("surname");
+    var personalCode = sharedPreferences.getString("personalCode");
 
     if(token != null){
       User.currentLogin.id = id;
-      if(personalInfoExist != null && personalInfoExist)
-        return LoginType.FullLogin;
+      User.currentLogin.name = name;
+      User.currentLogin.surname = surname;
+      User.currentLogin.personalCode = personalCode;
       return LoginType.PersonalDetails;
     }else
       return LoginType.Welcome;
