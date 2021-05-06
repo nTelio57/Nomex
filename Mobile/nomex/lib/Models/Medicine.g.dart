@@ -13,6 +13,6 @@ Medicine _$MedicineFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$MedicineToJson(Medicine instance) => <String, dynamic>{
-  'id': instance.id,
-  'name': instance.name,
-};
+      'id': instance.id,
+      'name': instance.name,
+    };

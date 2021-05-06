@@ -5,7 +5,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:nomex/Views/PersonalDetailsScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Models/User.dart';

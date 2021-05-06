@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nomex/Models/AuthRequest.dart';
-import 'package:nomex/Views/PersonalDetailsScreen.dart';
 import 'package:nomex/utilities/constants.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -198,7 +197,6 @@ class _LoginScreenState extends State<LoginScreen>{
         User user = User.fromJson(jsonData['user']);
         sharedPreferences.setString("token", jsonData['token']);
         sharedPreferences.setInt("id", user.id!);
-        sharedPreferences.setBool("personalInfoExist", user.personalDetails != null);
         User.currentLogin = user;
 
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context) => HomeScreen()), (Route<dynamic> route) => false);

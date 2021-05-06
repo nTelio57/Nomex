@@ -42,6 +42,8 @@ namespace Nomex.Auth
 
             var newUser = new User
             {
+                Name = authRequest.Name,
+                Surname = authRequest.Surname,
                 Email = authRequest.Email,
                 Password = Crypto.Hash(authRequest.Password+salt),
                 Salt = salt,

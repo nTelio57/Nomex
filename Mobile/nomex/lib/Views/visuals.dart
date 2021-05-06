@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nomex/Models/User.dart';
-import 'package:nomex/Views/PersonalDetailsScreen.dart';
 import 'PersonalDetailsInfo.dart';
 import 'LoginScreen.dart';
 import 'HomeScreen.dart';

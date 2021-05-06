@@ -15,30 +15,30 @@ Usage _$UsageFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$UsageToJson(Usage instance) => <String, dynamic>{
-  'id': instance.id,
-  'description': instance.description,
-  'dosage': _$DosageEnumMap[instance.dosage],
-};
+      'id': instance.id,
+      'description': instance.description,
+      'dosage': _$DosageEnumMap[instance.dosage],
+    };
 
 K _$enumDecode<K, V>(
-    Map<K, V> enumValues,
-    Object? source, {
-      K? unknownValue,
-    }) {
+  Map<K, V> enumValues,
+  Object? source, {
+  K? unknownValue,
+}) {
   if (source == null) {
     throw ArgumentError(
       'A value must be provided. Supported values: '
-          '${enumValues.values.join(', ')}',
+      '${enumValues.values.join(', ')}',
     );
   }
 
   return enumValues.entries.singleWhere(
-        (e) => e.value == source,
+    (e) => e.value == source,
     orElse: () {
       if (unknownValue == null) {
         throw ArgumentError(
           '`$source` is not one of the supported values: '
-              '${enumValues.values.join(', ')}',
+          '${enumValues.values.join(', ')}',
         );
       }
       return MapEntry(unknownValue, enumValues.values.first);
@@ -47,10 +47,10 @@ K _$enumDecode<K, V>(
 }
 
 K? _$enumDecodeNullable<K, V>(
-    Map<K, V> enumValues,
-    dynamic source, {
-      K? unknownValue,
-    }) {
+  Map<K, V> enumValues,
+  dynamic source, {
+  K? unknownValue,
+}) {
   if (source == null) {
     return null;
   }

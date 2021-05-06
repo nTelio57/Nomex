@@ -11,10 +11,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
     json['id'] as int?,
   )
     ..email = json['email'] as String?
-    ..personalDetails = json['personalDetails'] == null
-        ? null
-        : PersonalDetails.fromJson(
-        json['personalDetails'] as Map<String, dynamic>)
     ..name = json['name'] as String?
     ..surname = json['surname'] as String?
     ..personalCode = json['personalCode'] as String?
@@ -24,11 +20,10 @@ User _$UserFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-  'id': instance.id,
-  'email': instance.email,
-  'personalDetails': instance.personalDetails,
-  'name': instance.name,
-  'surname': instance.surname,
-  'personalCode': instance.personalCode,
-  'birthDate': instance.birthDate?.toIso8601String(),
-};
+      'id': instance.id,
+      'email': instance.email,
+      'name': instance.name,
+      'surname': instance.surname,
+      'personalCode': instance.personalCode,
+      'birthDate': instance.birthDate?.toIso8601String(),
+    };

@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'dart:async';
 
+import 'HomeScreen.dart';
 import 'LoginScreen.dart';
-import 'PersonalDetailsScreen.dart';
 import '../Models/User.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -24,6 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen>
   final TextEditingController _emailText = TextEditingController();
   final TextEditingController _passwordText = TextEditingController();
   final TextEditingController _passwordRepeatText = TextEditingController();
+  final TextEditingController _nameText = TextEditingController();
+  final TextEditingController _surnameText = TextEditingController();
 
   @override
   void initState()
@@ -71,10 +73,14 @@ class _RegisterScreenState extends State<RegisterScreen>
                     ),
                   ),
                   SizedBox(height: 30.0),
+                  _nameField(),
+                  SizedBox(height: 25.0),
+                  _surnameField(),
+                  SizedBox(height: 25.0),
                   _emailField(),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 25.0),
                   _passwordField(),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 25.0),
                   _passwordRepeatField(),
                   SizedBox(height: 20.0),
                   _registerButton(),
@@ -191,6 +197,76 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
   }
 
+  Widget _nameField()
+  {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        "Name",
+        style: kLabelStyle,
+      ),
+      SizedBox(height: 10.0),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: kBoxDecorationStyle,
+        height: 60.0,
+        child: TextField(
+          keyboardType: TextInputType.emailAddress,
+          controller: _nameText,
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans'
+          ),
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              hintText: "Enter your name",
+              hintStyle: kHintTextStyle
+          ),
+        ),
+      )
+    ],
+    );
+  }
+
+  Widget _surnameField()
+  {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        "Surname",
+        style: kLabelStyle,
+      ),
+      SizedBox(height: 10.0),
+      Container(
+        alignment: Alignment.centerLeft,
+        decoration: kBoxDecorationStyle,
+        height: 60.0,
+        child: TextField(
+          keyboardType: TextInputType.emailAddress,
+          controller: _surnameText,
+          style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans'
+          ),
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+              hintText: "Enter your surname",
+              hintStyle: kHintTextStyle
+          ),
+        ),
+      )
+    ],
+    );
+  }
+
   Widget _registerButton()
   {
     return Container(
@@ -199,7 +275,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       child: ElevatedButton(
         onPressed: () {
           print('Register clicked');
-          registerUser(_emailText.text, _passwordText.text, _passwordRepeatText.text);
+          registerUser(_nameText.text, _surnameText.text, _emailText.text, _passwordText.text, _passwordRepeatText.text);
         },
         //padding: EdgeInsets.all(15.0),
         style: ElevatedButton.styleFrom(
@@ -259,12 +335,14 @@ class _RegisterScreenState extends State<RegisterScreen>
     );
   }
 
-  Future<bool> registerUser(String email, String password, String repeatPassword) async
+  Future<bool> registerUser(String name, String surname, String email, String password, String repeatPassword) async
   {
     if(password != repeatPassword)
       return false;
 
     var authRequest = new AuthRequest(email, password);
+    authRequest.name = name;
+    authRequest.surname = surname;
     final response = await http.post(Uri.https('10.0.2.2:5001', '/api/Auth/register'),
         headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -294,7 +372,7 @@ class _RegisterScreenState extends State<RegisterScreen>
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => PersonalDetailsScreen()
+            builder: (context) => HomeScreen()
         )
     );
   }
